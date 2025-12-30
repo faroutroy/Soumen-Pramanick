@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soumen Pramanick | Business Analytics Specialist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        header .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: opacity 0.3s;
+        }
+
+        .contact-info a:hover {
+            opacity: 0.8;
+        }
+
+        .download-resume {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            border: 2px solid white;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .download-resume:hover {
+            background: rgba(255, 255, 255, 0.3);
+            opacity: 1 !important;
+        }
+
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 5px 20px;
+        }
+
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #764ba2;
+        }
+
+        section {
+            background: white;
+            margin: 40px auto;
+            padding: 60px 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .skill-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .skill-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .skill-card li {
+            padding: 5px 0;
+            color: #555;
+        }
+
+        .skill-card li::before {
+            content: "▹ ";
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        .experience-item, .project-item {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #fafafa;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .experience-item h3, .project-item h3 {
+            margin-top: 0;
+        }
+
+        .job-title {
+            color: #667eea;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .company {
+            color: #764ba2;
+            font-size: 1.1em;
+            margin: 5px 0;
+        }
+
+        .date {
+            color: #888;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .experience-item ul, .project-item ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .experience-item li, .project-item li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .project-tags {
+            margin-top: 15px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 5px 5px 5px 0;
+            font-size: 0.85em;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .education-card {
+            background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+            padding: 30px;
+            border-radius: 8px;
+            border-top: 4px solid #667eea;
+        }
+
+        .education-card h3 {
+            margin-top: 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .tagline {
+                font-size: 1.1em;
+            }
+
+            section {
+                padding: 40px 20px;
+                margin: 20px 10px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav li {
+                margin: 10px 0;
+            }
+        }
+
+        .summary {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #555;
+            background: linear-gradient(135deg, #667eea08 0%, #764ba208 100%);
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Soumen Pramanick</h1>
+            <p class="tagline">Business Analytics Specialist | Data-Driven Decision Making Expert</p>
+            <div class="contact-info">
+                <a href="mailto:krishnasoumen2@gmail.com">📧 Email</a>
+                <a href="tel:+447823615433">📱 +44 7823615433</a>
+                <a href="#">💼 LinkedIn</a>
+                <a href="#">💻 GitHub</a>
+                <a href="#" class="download-resume" onclick="downloadResume(event)">📄 Download Resume</a>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="summary">
+                <p>Data-driven Business Analytics Specialist with MSc in Business Analytics and 2.5+ years of experience transforming data into actionable business insights. I specialize in advanced analytics, predictive modeling, and data visualization using Power BI, Python, R, and SQL.</p>
+                <p style="margin-top: 15px;">My expertise lies in bridging technical and business domains by translating complex analytical findings into strategic recommendations that drive operational efficiency, cost reduction, and revenue growth. I have a proven track record in requirements analysis, stakeholder engagement, and delivering data solutions that enable data-driven decision making across organizations.</p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h4>Analytics & BI Tools</h4>
+                    <ul>
+                        <li>Power BI (DAX, Power Query)</li>
+                        <li>Tableau</li>
+                        <li>Advanced Excel & VBA</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h4>Programming & Statistics</h4>
+                    <ul>
+                        <li>Python (Pandas, NumPy, Scikit-learn)</li>
+                        <li>R (ggplot2, dplyr, tidyr)</li>
+                        <li>SQL (T-SQL, Query Optimization)</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h4>Machine Learning</h4>
+                    <ul>
+                        <li>Regression & Classification</li>
+                        <li>Random Forest & XGBoost</li>
+                        <li>Feature Engineering</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h4>Data Management</h4>
+                    <ul>
+                        <li>Data Modeling & Warehousing</li>
+                        <li>ETL/ELT Processes</li>
+                        <li>SQL Server & Database Design</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h4>Business Tools</h4>
+                    <ul>
+                        <li>Microsoft Power Platform</li>
+                        <li>Azure Data Factory</li>
+                        <li>SharePoint & Office 365</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h4>Core Competencies</h4>
+                    <ul>
+                        <li>Predictive Analytics</li>
+                        <li>Financial Modeling</li>
+                        <li>KPI Development</li>
+                        <li>Data Storytelling</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Professional Experience</h2>
+            
+            <div class="experience-item">
+                <div class="job-title">Project Lead</div>
+                <div class="company">Muthal Software, Chennai, India (Remote)</div>
+                <div class="date">December 2025 – Present</div>
+                <ul>
+                    <li>Leading analytical initiatives for US-based clients, conducting requirements analysis to identify key business metrics and develop customized reporting solutions</li>
+                    <li>Architecting enterprise Power BI solutions with complex DAX calculations, data models, and interactive dashboards enabling real-time business intelligence</li>
+                    <li>Performing advanced data analysis on multi-million dollar portfolios, identifying trends, patterns, and anomalies that inform strategic business decisions</li>
+                    <li>Designing and implementing ETL processes to integrate data from multiple sources including SharePoint, SQL databases, and APIs</li>
+                    <li>Mentoring team members on analytics best practices including data modeling, DAX optimization, and effective visualization techniques</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-title">Software Engineer</div>
+                <div class="company">Muthal Software, Chennai, India (Remote)</div>
+                <div class="date">May 2025 – December 2025</div>
+                <ul>
+                    <li>Developed 15+ interactive Power BI dashboards with drill-through capabilities, improving reporting efficiency by 35%</li>
+                    <li>Conducted data profiling and quality assessments during legacy system migrations, designing validation rules for 10,000+ records</li>
+                    <li>Created sophisticated DAX measures for time intelligence, year-over-year comparisons, and running totals</li>
+                    <li>Performed root cause analysis on operational inefficiencies using data mining techniques</li>
+                    <li>Designed automated reporting workflows reducing manual reporting time by 30%</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-title">Junior Engineer</div>
+                <div class="company">Mindsprint Inc. (Olam Information Services), Chennai, India</div>
+                <div class="date">August 2022 – July 2024</div>
+                <ul>
+                    <li>Built 5+ Power BI dashboards with row-level security and mobile optimization, improving user satisfaction scores by 10%</li>
+                    <li>Embedded interactive reports into Dynamics 365 enabling real-time KPI tracking for sales and operational metrics</li>
+                    <li>Conducted stakeholder interviews to translate business needs into analytical solutions</li>
+                    <li>Performed descriptive and diagnostic analytics, creating visualizations for non-technical audiences</li>
+                    <li>Developed SQL queries for data extraction and analysis from relational databases</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Key Analytical Projects</h2>
+            
+            <div class="project-item">
+                <h3>Data-Driven Employee Attrition Analysis</h3>
+                <div class="date">October 2024 – January 2025 | MSc Business Analytics Capstone Project</div>
+                <ul>
+                    <li>Developed predictive models using Logistic Regression, Random Forest, and XGBoost achieving 85% accuracy</li>
+                    <li>Performed comprehensive EDA on 1,500+ employee records, identifying key retention risk factors</li>
+                    <li>Engineered features and applied statistical techniques including correlation analysis and chi-square tests</li>
+                    <li>Created interactive Power BI dashboards with predictive analytics visualizations and what-if analysis</li>
+                    <li>Delivered actionable recommendations supporting 15% improvement in retention strategy planning</li>
+                </ul>
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">R</span>
+                    <span class="tag">Machine Learning</span>
+                    <span class="tag">Power BI</span>
+                    <span class="tag">Predictive Analytics</span>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <h3>Feasibility Study of Sensory Room</h3>
+                <div class="date">May 2025 – October 2025 | The Meadows Community Centre</div>
+                <ul>
+                    <li>Led comprehensive feasibility analysis combining quantitative surveys (n=60) and qualitative interviews (n=6)</li>
+                    <li>Performed financial modeling including cost-revenue forecasting, break-even analysis, and NPV calculations</li>
+                    <li>Conducted statistical analysis identifying 90% positive community response indicating strong demand</li>
+                    <li>Developed strategic recommendations with hybrid funding model and phased rollout plan</li>
+                    <li>Presented findings through compelling data visualizations achieving stakeholder buy-in</li>
+                </ul>
+                <div class="project-tags">
+                    <span class="tag">Financial Modeling</span>
+                    <span class="tag">Statistical Analysis</span>
+                    <span class="tag">Stakeholder Management</span>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <h3>Systematic Investment Portfolio Analytics</h3>
+                <div class="date">January 2023 – December 2023 | Olam Agri Group</div>
+                <ul>
+                    <li>Applied advanced analytics to analyze $2M+ investment portfolio providing spending insights</li>
+                    <li>Designed complex Power BI dashboards with custom DAX measures for ROI analysis and budget variance tracking</li>
+                    <li>Developed relational database schema with normalized tables and optimized indexing</li>
+                    <li>Improved financial transparency by 25% through automated reporting</li>
+                    <li>Created drill-through reports enabling analysis by category, time period, and performance indicators</li>
+                </ul>
+                <div class="project-tags">
+                    <span class="tag">Power BI</span>
+                    <span class="tag">DAX</span>
+                    <span class="tag">Financial Analysis</span>
+                    <span class="tag">Database Design</span>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <h3>Cost Optimization Analysis – Web Page Replication</h3>
+                <div class="date">January 2024 – July 2024 | Arise Net</div>
+                <ul>
+                    <li>Conducted comprehensive cost-benefit analysis comparing in-house vs. third-party maintenance</li>
+                    <li>Performed financial analysis demonstrating $65K annual cost savings (65% reduction)</li>
+                    <li>Analyzed system performance metrics documenting 40% improvement in page load times</li>
+                    <li>Created business case presentation with ROI calculations and risk assessment</li>
+                </ul>
+                <div class="project-tags">
+                    <span class="tag">Cost-Benefit Analysis</span>
+                    <span class="tag">ROI Calculation</span>
+                    <span class="tag">Performance Analytics</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education & Certifications</h2>
+            <div class="education-grid">
+                <div class="education-card">
+                    <h3>MSc Business Analytics</h3>
+                    <div class="company">Northumbria University, Newcastle Upon Tyne, UK</div>
+                    <div class="date">September 2024 – October 2025 | Distinction Expected</div>
+                    <p style="margin-top: 15px; color: #555;">Relevant Coursework: Data Mining, Machine Learning, Business Intelligence, Statistical Analysis, Predictive Modeling, Data Visualization</p>
+                </div>
+                <div class="education-card">
+                    <h3>BTech Computer Science Engineering</h3>
+                    <div class="company">Hindustan Institute of Technology and Science, Chennai, India</div>
+                    <div class="date">July 2018 – April 2022</div>
+                    <p style="margin-top: 15px; color: #555;">Relevant Coursework: Database Management Systems, Data Structures & Algorithms, Statistics for Engineers</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 40px;">Professional Certifications</h3>
+            <div class="skills-grid" style="margin-top: 20px;">
+                <div class="skill-card">
+                    <h4>Google Data Analytics Professional Certificate</h4>
+                    <p style="color: #888; margin-top: 5px;">June 2025</p>
+                </div>
+                <div class="skill-card">
+                    <h4>Microsoft Azure Fundamentals AZ-900</h4>
+                    <p style="color: #888; margin-top: 5px;">December 2023</p>
+                </div>
+                <div class="skill-card">
+                    <h4>Python for Data Science and AI</h4>
+                    <p style="color: #888; margin-top: 5px;">Certified</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Let's Connect</h2>
+            <p style="font-size: 1.1em; color: #555; margin-bottom: 30px;">I'm always interested in discussing new opportunities, collaborations, or data analytics challenges. Feel free to reach out!</p>
+            <div style="text-align: center;">
+                <a href="mailto:krishnasoumen2@gmail.com" class="cta-button">Get In Touch</a>
+                <a href="#" class="cta-button" onclick="downloadResume(event)" style="margin-left: 20px;">Download Resume</a>
+            </div>
+            <div style="margin-top: 40px; text-align: center;">
+                <p style="color: #888;">📍 Newcastle, UK</p>
+                <p style="color: #888; margin-top: 10px;">📧 krishnasoumen2@gmail.com | 📱 +44 7823615433</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Soumen Pramanick. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Business Analytics Specialist | Newcastle, UK</p>
+        </div>
+    </footer>
+
+    <script>
+        // Download Resume Function
+        function downloadResume(e) {
+            e.preventDefault();
+            
+            // Create a simple text-based resume
+            const resumeContent = `SOUMEN PRAMANICK
+Business Analytics Specialist
+Newcastle, UK | +44 7823615433 | krishnasoumen2@gmail.com
+
+PROFESSIONAL SUMMARY
+Data-driven Business Analytics Specialist with MSc in Business Analytics and 2.5+ years of experience transforming data into actionable business insights. Expertise in advanced analytics, predictive modeling, and data visualization using Power BI, Python, R, and SQL.
+
+TECHNICAL SKILLS
+• Analytics & BI: Power BI, Tableau, Excel
+• Programming: Python, R, SQL
+• Machine Learning: Regression, Classification, Random Forest, XGBoost
+• Data Management: ETL/ELT, Data Warehousing, Database Design
+• Business Tools: Microsoft Power Platform, Azure, SharePoint
+
+PROFESSIONAL EXPERIENCE
+
+Project Lead | Muthal Software (December 2025 – Present)
+• Leading analytical initiatives for US-based clients
+• Architecting enterprise Power BI solutions with complex DAX calculations
+• Performing advanced data analysis on multi-million dollar portfolios
+• Designing and implementing ETL processes
+
+Software Engineer | Muthal Software (May 2025 – December 2025)
+• Developed 15+ interactive Power BI dashboards (35% efficiency improvement)
+• Conducted data profiling for 10,000+ records during migrations
+• Created sophisticated DAX measures for time intelligence analysis
+• Designed automated workflows (30% time reduction)
+
+Junior Engineer | Mindsprint Inc. (August 2022 – July 2024)
+• Built 5+ Power BI dashboards with row-level security
+• Embedded reports into Dynamics 365 for real-time KPI tracking
+• Conducted stakeholder interviews and requirements gathering
+
+KEY PROJECTS
+• Employee Attrition Analysis: Predictive models with 85% accuracy
+• Sensory Room Feasibility Study: Financial modeling and strategic recommendations
+• Investment Portfolio Analytics: $2M+ portfolio analysis (25% transparency improvement)
+• Cost Optimization Analysis: $65K annual savings identified
+
+EDUCATION
+MSc Business Analytics | Northumbria University (2024-2025)
+BTech Computer Science | Hindustan Institute (2018-2022)
+
+CERTIFICATIONS
+• Google Data Analytics Professional Certificate
+• Microsoft Azure Fundamentals AZ-900
+• Python for Data Science and AI
+`;
+
+            // Create blob and download
+            const blob = new Blob([resumeContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Soumen_Pramanick_Resume.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            
+            // Show download notification
+            const notification = document.createElement('div');
+            notification.textContent = '✓ Resume downloaded successfully!';
+            notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #4CAF50; color: white; padding: 15px 25px; border-radius: 5px; z-index: 1000; animation: slideIn 0.3s ease;';
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

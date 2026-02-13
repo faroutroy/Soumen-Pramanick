@@ -3,24 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SharePoint Multi-List Search POC - Step-by-Step Guide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <title>Soumen Pramanick | Business Analytics Specialist</title>
     <style>
-        :root {
-            --primary: #0F4C81;
-            --primary-light: #2E75B6;
-            --accent: #00BCF2;
-            --success: #107C10;
-            --warning: #FFB900;
-            --error: #D13438;
-            --bg-main: #FAF9F8;
-            --bg-card: #FFFFFF;
-            --text-primary: #201F1E;
-            --text-secondary: #605E5C;
-            --border: #EDEBE9;
-            --shadow: rgba(0, 0, 0, 0.1);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -28,153 +12,283 @@
         }
 
         body {
-            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-main);
-            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
         }
 
-        .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 60px 20px;
+            padding: 80px 0 60px;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
+        header::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 188, 242, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            pointer-events: none;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
         }
 
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
+        header .container {
             position: relative;
             z-index: 1;
         }
 
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5em;
-            font-weight: 900;
-            margin-bottom: 15px;
-            line-height: 1.1;
+            font-size: 3em;
+            margin-bottom: 10px;
+            animation: fadeInDown 0.8s ease;
         }
 
-        .hero-subtitle {
+        .tagline {
             font-size: 1.3em;
+            margin-bottom: 20px;
             opacity: 0.95;
-            font-weight: 400;
-            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease 0.2s both;
         }
 
-        .hero-meta {
+        .contact-info {
+            margin-top: 20px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: opacity 0.3s;
+        }
+
+        .contact-info a:hover {
+            opacity: 0.8;
+        }
+
+        .download-resume {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            border: 2px solid white;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .download-resume:hover {
+            background: rgba(255, 255, 255, 0.3);
+            opacity: 1 !important;
+        }
+
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
             display: flex;
-            gap: 30px;
             justify-content: center;
+            padding: 15px 0;
             flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 5px 20px;
+        }
+
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #764ba2;
+        }
+
+        section {
+            background: white;
+            margin: 40px auto;
+            padding: 60px 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
             margin-top: 30px;
         }
 
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 10px 20px;
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
+        .skill-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .meta-icon {
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .skill-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .skill-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .skill-card li {
+            padding: 5px 0;
+            color: #555;
+        }
+
+        .skill-card li::before {
+            content: "▹ ";
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        .experience-item, .project-item {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #fafafa;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .experience-item h3, .project-item h3 {
+            margin-top: 0;
+        }
+
+        .job-title {
+            color: #667eea;
             font-size: 1.3em;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .progress-tracker {
-            position: sticky;
-            top: 0;
-            background: var(--bg-card);
-            border-bottom: 2px solid var(--border);
-            padding: 20px;
-            z-index: 100;
-            box-shadow: 0 2px 8px var(--shadow);
-        }
-
-        .progress-bar {
-            height: 6px;
-            background: var(--border);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-            transition: width 0.3s ease;
-            width: 0%;
-        }
-
-        .progress-steps {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .progress-step {
-            flex: 1;
-            min-width: 120px;
-            text-align: center;
-            font-size: 0.85em;
-            color: var(--text-secondary);
-            padding: 5px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .progress-step.active {
-            background: var(--primary);
-            color: white;
             font-weight: 600;
         }
 
-        .progress-step.completed {
-            color: var(--success);
+        .company {
+            color: #764ba2;
+            font-size: 1.1em;
+            margin: 5px 0;
         }
 
-        .section {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 8px var(--shadow);
-            border-left: 4px solid var(--primary-light);
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
+        .date {
+            color: #888;
+            font-style: italic;
+            margin-bottom: 15px;
         }
 
-        @keyframes fadeInUp {
+        .experience-item ul, .project-item ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .experience-item li, .project-item li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .project-tags {
+            margin-top: 15px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 5px 5px 5px 0;
+            font-size: 0.85em;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .education-card {
+            background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+            padding: 30px;
+            border-radius: 8px;
+            border-top: 4px solid #667eea;
+        }
+
+        .education-card h3 {
+            margin-top: 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(-30px);
             }
             to {
                 opacity: 1;
@@ -182,1449 +296,424 @@
             }
         }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .section-number {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.5em;
-            flex-shrink: 0;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2em;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .step-card {
-            background: var(--bg-main);
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-left: 3px solid var(--accent);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .step-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 12px var(--shadow);
-        }
-
-        .step-title {
-            font-size: 1.3em;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .step-icon {
-            font-size: 1.2em;
-        }
-
-        .code-block {
-            background: #1E1E1E;
-            color: #D4D4D4;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 15px 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9em;
-            overflow-x: auto;
-            position: relative;
-            line-height: 1.6;
-        }
-
-        .code-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .code-label {
-            color: #569CD6;
-            font-weight: 600;
-            font-size: 0.9em;
-        }
-
-        .copy-btn {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 6px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.85em;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .copy-btn:hover {
-            background: var(--primary-light);
-            transform: scale(1.05);
-        }
-
-        .copy-btn.copied {
-            background: var(--success);
-        }
-
-        .keyword {
-            color: #569CD6;
-        }
-
-        .string {
-            color: #CE9178;
-        }
-
-        .comment {
-            color: #6A9955;
-        }
-
-        .function {
-            color: #DCDCAA;
-        }
-
-        .info-box {
-            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
-            border-left: 4px solid var(--accent);
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        .info-box-title {
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .warning-box {
-            background: linear-gradient(135deg, #FFF9E6 0%, #FFE082 100%);
-            border-left: 4px solid var(--warning);
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        .warning-box-title {
-            font-weight: 700;
-            color: #F9A825;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .success-box {
-            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-            border-left: 4px solid var(--success);
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        .success-box-title {
-            font-weight: 700;
-            color: var(--success);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .checklist {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .checklist li {
-            padding: 10px 0;
-            padding-left: 35px;
-            position: relative;
-        }
-
-        .checklist li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--success);
-            font-weight: 700;
-            font-size: 1.2em;
-        }
-
-        .file-tree {
-            background: var(--bg-main);
-            padding: 20px;
-            border-radius: 8px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9em;
-            line-height: 1.8;
-        }
-
-        .folder {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        .file {
-            color: var(--text-secondary);
-        }
-
-        .command-line {
-            background: #1E1E1E;
-            color: #4EC9B0;
-            padding: 15px 20px;
-            border-radius: 8px;
-            font-family: 'JetBrains Mono', monospace;
-            margin: 15px 0;
-            border-left: 3px solid var(--success);
-        }
-
-        .command-line::before {
-            content: '$ ';
-            color: #569CD6;
-            font-weight: 700;
-        }
-
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 40px;
-            gap: 20px;
-        }
-
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(15, 76, 129, 0.3);
-        }
-
-        .btn-secondary {
-            background: var(--bg-main);
-            color: var(--primary);
-            border: 2px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--border);
-        }
-
-        .completion-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--success);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9em;
-        }
-
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .resource-card {
-            background: var(--bg-main);
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 3px solid var(--accent);
-            transition: transform 0.2s ease;
-        }
-
-        .resource-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .resource-title {
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-
-        .resource-link {
-            color: var(--accent);
-            text-decoration: none;
-            font-size: 0.9em;
-        }
-
-        .resource-link:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            background: var(--primary);
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 60px;
-        }
-
-        footer h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2em;
-            margin-bottom: 15px;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5em;
+                font-size: 2em;
             }
 
-            .section {
-                padding: 25px;
+            .tagline {
+                font-size: 1.1em;
             }
 
-            .section-title {
-                font-size: 1.5em;
+            section {
+                padding: 40px 20px;
+                margin: 20px 10px;
             }
 
-            .progress-steps {
-                display: none;
-            }
-
-            .nav-buttons {
+            nav ul {
                 flex-direction: column;
+                align-items: center;
             }
+
+            nav li {
+                margin: 10px 0;
+            }
+        }
+
+        .summary {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #555;
+            background: linear-gradient(135deg, #667eea08 0%, #764ba208 100%);
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
         }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <div class="hero-content">
-            <h1>SharePoint Multi-List Search POC</h1>
-            <p class="hero-subtitle">Step-by-Step Implementation Guide using SPFx + PnP JS</p>
-            <div class="hero-meta">
-                <div class="meta-item">
-                    <span class="meta-icon">⏱️</span>
-                    <span>~2 hours</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-icon">📦</span>
-                    <span>SPFx + React</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-icon">🎯</span>
-                    <span>Production Ready</span>
-                </div>
+    <header>
+        <div class="container">
+            <h1>Soumen Pramanick</h1>
+            <p class="tagline">Lead Power Platform Developer | Business Analytics Specialist</p>
+            <div class="contact-info">
+                <a href="mailto:krishnasoumen2@gmail.com">📧 Email</a>
+                <a href="tel:+447823615433">📱 +44 7823615433</a>
+                <a href="https://www.linkedin.com/in/soumenpramanick/">💼 LinkedIn</a>
+                <a href="https://github.com/faroutroy">💻 GitHub</a>
+                <a href="#" class="download-resume" onclick="downloadResume(event)">📄 Download Resume</a>
             </div>
         </div>
-    </div>
+    </header>
 
-    <div class="progress-tracker">
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <div class="progress-steps" id="progressSteps">
-            <div class="progress-step active" data-step="0">Prerequisites</div>
-            <div class="progress-step" data-step="1">Setup</div>
-            <div class="progress-step" data-step="2">Create Project</div>
-            <div class="progress-step" data-step="3">Build Models</div>
-            <div class="progress-step" data-step="4">Build Service</div>
-            <div class="progress-step" data-step="5">Build UI</div>
-            <div class="progress-step" data-step="6">Test</div>
-            <div class="progress-step" data-step="7">Deploy</div>
-        </div>
-    </div>
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
     <div class="container">
-        <!-- Step 0: Prerequisites -->
-        <section class="section" id="step-0">
-            <div class="section-header">
-                <div class="section-number">0</div>
-                <h2 class="section-title">Prerequisites Check</h2>
-            </div>
-
-            <p>Before we begin, ensure you have the following installed and configured on your development machine:</p>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">🔧</span>
-                    Required Software
-                </h3>
-                <ul class="checklist">
-                    <li>Node.js (LTS version 16.x or 18.x) - <a href="https://nodejs.org" target="_blank">Download</a></li>
-                    <li>Visual Studio Code - <a href="https://code.visualstudio.com" target="_blank">Download</a></li>
-                    <li>Git - <a href="https://git-scm.com" target="_blank">Download</a></li>
-                    <li>SharePoint Online tenant with admin access</li>
-                </ul>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">✅</span>
-                    Verify Installation
-                </h3>
-                <p>Run these commands in your terminal to verify installations:</p>
-                <div class="command-line">node --version</div>
-                <p>Expected output: v16.x.x or v18.x.x</p>
-                <div class="command-line">npm --version</div>
-                <p>Expected output: 8.x.x or higher</p>
-                <div class="command-line">git --version</div>
-                <p>Expected output: git version 2.x.x</p>
-            </div>
-
-            <div class="info-box">
-                <div class="info-box-title">
-                    <span>💡</span> Quick Tip
-                </div>
-                <p>If you're on Windows, consider using Windows Terminal for a better command-line experience. On macOS/Linux, your default terminal works great!</p>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" disabled>← Previous</button>
-                <button class="btn btn-primary" onclick="nextStep()">Next Step →</button>
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="summary">
+                <p>Data-driven Business Analytics Specialist with MSc in Business Analytics and 2.5+ years of experience transforming data into actionable business insights. I specialize in advanced analytics, predictive modeling, and data visualization using Power BI, Python, R, and SQL.</p>
+                <p style="margin-top: 15px;">My expertise lies in bridging technical and business domains by translating complex analytical findings into strategic recommendations that drive operational efficiency, cost reduction, and revenue growth. I have a proven track record in requirements analysis, stakeholder engagement, and delivering data solutions that enable data-driven decision making across organizations.</p>
             </div>
         </section>
 
-        <!-- Step 1: Environment Setup -->
-        <section class="section" id="step-1" style="display: none;">
-            <div class="section-header">
-                <div class="section-number">1</div>
-                <h2 class="section-title">Install Development Tools</h2>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">📥</span>
-                    Install Yeoman and SPFx Generator
-                </h3>
-                <p>Yeoman is a scaffolding tool, and the SPFx generator creates the project structure:</p>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span class="code-label">Terminal Command</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <pre>npm install -g yo @microsoft/generator-sharepoint</pre>
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h4>Analytics & BI Tools</h4>
+                    <ul>
+                        <li>Power BI (DAX, Power Query)</li>
+                        <li>Tableau</li>
+                        <li>Advanced Excel & VBA</li>
+                    </ul>
                 </div>
-                <p>This installs both Yeoman and the SharePoint Framework generator globally.</p>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">⚙️</span>
-                    Install Gulp CLI
-                </h3>
-                <p>Gulp is the task runner used by SPFx projects:</p>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span class="code-label">Terminal Command</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <pre>npm install -g gulp-cli</pre>
+                <div class="skill-card">
+                    <h4>Programming & Statistics</h4>
+                    <ul>
+                        <li>Python (Pandas, NumPy, Scikit-learn)</li>
+                        <li>R (ggplot2, dplyr, tidyr)</li>
+                        <li>SQL (T-SQL, Query Optimization)</li>
+                    </ul>
                 </div>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">✨</span>
-                    Verify Installation
-                </h3>
-                <p>Confirm the tools are installed correctly:</p>
-                <div class="command-line">yo --version</div>
-                <div class="command-line">gulp --version</div>
-            </div>
-
-            <div class="warning-box">
-                <div class="warning-box-title">
-                    <span>⚠️</span> Installation Time
+                <div class="skill-card">
+                    <h4>Machine Learning</h4>
+                    <ul>
+                        <li>Regression & Classification</li>
+                        <li>Random Forest & XGBoost</li>
+                        <li>Feature Engineering</li>
+                    </ul>
                 </div>
-                <p>Installing these global packages may take 3-5 minutes depending on your internet connection. Be patient!</p>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep()">← Previous</button>
-                <button class="btn btn-primary" onclick="nextStep()">Next Step →</button>
-            </div>
-        </section>
-
-        <!-- Step 2: Create SPFx Project -->
-        <section class="section" id="step-2" style="display: none;">
-            <div class="section-header">
-                <div class="section-number">2</div>
-                <h2 class="section-title">Create Your SPFx Project</h2>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">📁</span>
-                    Create Project Directory
-                </h3>
-                <p>First, create and navigate to a new folder for your project:</p>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span class="code-label">Terminal Commands</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <pre>mkdir multi-list-search
-cd multi-list-search</pre>
+                <div class="skill-card">
+                    <h4>Data Management</h4>
+                    <ul>
+                        <li>Data Modeling & Warehousing</li>
+                        <li>ETL/ELT Processes</li>
+                        <li>SQL Server & Database Design</li>
+                    </ul>
                 </div>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">🎯</span>
-                    Run SPFx Generator
-                </h3>
-                <p>Launch the Yeoman generator to scaffold your project:</p>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span class="code-label">Terminal Command</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <pre>yo @microsoft/sharepoint</pre>
+                <div class="skill-card">
+                    <h4>Business Tools</h4>
+                    <ul>
+                        <li>Microsoft Power Platform</li>
+                        <li>Azure Data Factory</li>
+                        <li>SharePoint & Office 365</li>
+                    </ul>
                 </div>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">📝</span>
-                    Answer the Prompts
-                </h3>
-                <p>The generator will ask several questions. Use these answers:</p>
-                <div class="info-box">
-                    <ul style="list-style: none; padding: 0;">
-                        <li><strong>What is your solution name?</strong> → multi-list-search</li>
-                        <li><strong>Which baseline packages do you want to target?</strong> → SharePoint Online only (latest)</li>
-                        <li><strong>Where do you want to place the files?</strong> → Use the current folder</li>
-                        <li><strong>Do you want to allow the tenant admin the choice?</strong> → No</li>
-                        <li><strong>Will the components require permissions?</strong> → No</li>
-                        <li><strong>Which type of client-side component?</strong> → WebPart</li>
-                        <li><strong>What is your Web part name?</strong> → MultiListSearch</li>
-                        <li><strong>What is your Web part description?</strong> → Search across multiple SharePoint lists</li>
-                        <li><strong>Which framework would you like to use?</strong> → React</li>
+                <div class="skill-card">
+                    <h4>Core Competencies</h4>
+                    <ul>
+                        <li>Predictive Analytics</li>
+                        <li>Financial Modeling</li>
+                        <li>KPI Development</li>
+                        <li>Data Storytelling</li>
                     </ul>
                 </div>
             </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">⏳</span>
-                    Install Dependencies
-                </h3>
-                <p>The generator will automatically run <code>npm install</code>. This takes 5-10 minutes.</p>
-                <div class="warning-box">
-                    <div class="warning-box-title">
-                        <span>☕</span> Coffee Break
-                    </div>
-                    <p>While npm installs hundreds of packages, this is a great time to grab coffee or review the architecture diagram!</p>
-                </div>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">📦</span>
-                    Install PnP JS Library
-                </h3>
-                <p>Once the initial installation completes, add the PnP JS library:</p>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span class="code-label">Terminal Command</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <pre>npm install @pnp/sp @pnp/logging @pnp/common --save</pre>
-                </div>
-            </div>
-
-            <div class="success-box">
-                <div class="success-box-title">
-                    <span>🎉</span> Project Created!
-                </div>
-                <p>Your SPFx project structure is now ready. Open it in VS Code:</p>
-                <div class="command-line">code .</div>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep()">← Previous</button>
-                <button class="btn btn-primary" onclick="nextStep()">Next Step →</button>
-            </div>
         </section>
 
-        <!-- Step 3: Create Data Models -->
-        <section class="section" id="step-3" style="display: none;">
-            <div class="section-header">
-                <div class="section-number">3</div>
-                <h2 class="section-title">Create Data Models</h2>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">📂</span>
-                    Create Models Folder
-                </h3>
-                <p>In VS Code, create a new folder structure:</p>
-                <div class="file-tree">
-src/webparts/multiListSearch/
-└── <span class="folder">models/</span>
-    └── <span class="file">ISearchResult.ts</span> ← Create this file
-                </div>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">💾</span>
-                    Create ISearchResult.ts
-                </h3>
-                <p>Create the file <code>src/webparts/multiListSearch/models/ISearchResult.ts</code> and add this code:</p>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span class="code-label">ISearchResult.ts</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <pre><span class="comment">// Interface for individual search results</span>
-<span class="keyword">export interface</span> ISearchResult {
-  id: <span class="keyword">number</span>;
-  title: <span class="keyword">string</span>;
-  description?: <span class="keyword">string</span>;
-  listTitle: <span class="keyword">string</span>;
-  listId: <span class="keyword">string</span>;
-  modified: <span class="keyword">Date</span>;
-  author: <span class="keyword">string</span>;
-  url: <span class="keyword">string</span>;
-}
-
-<span class="comment">// Interface for list information</span>
-<span class="keyword">export interface</span> IListInfo {
-  id: <span class="keyword">string</span>;
-  title: <span class="keyword">string</span>;
-  itemCount: <span class="keyword">number</span>;
-}
-
-<span class="comment">// Interface for search response</span>
-<span class="keyword">export interface</span> ISearchResponse {
-  results: ISearchResult[];
-  totalCount: <span class="keyword">number</span>;
-  searchTerm: <span class="keyword">string</span>;
-  executionTime: <span class="keyword">number</span>;
-}</pre>
-                </div>
-            </div>
-
-            <div class="info-box">
-                <div class="info-box-title">
-                    <span>💡</span> Why TypeScript Interfaces?
-                </div>
-                <p>Interfaces provide type safety, IntelliSense support, and better code documentation. They help catch errors during development rather than runtime.</p>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep()">← Previous</button>
-                <button class="btn btn-primary" onclick="nextStep()">Next Step →</button>
-            </div>
-        </section>
-
-        <!-- Step 4: Create Search Service -->
-        <section class="section" id="step-4" style="display: none;">
-            <div class="section-header">
-                <div class="section-number">4</div>
-                <h2 class="section-title">Build the Search Service</h2>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">📂</span>
-                    Create Services Folder
-                </h3>
-                <p>Create a new folder for services:</p>
-                <div class="file-tree">
-src/webparts/multiListSearch/
-└── <span class="folder">services/</span>
-    └── <span class="file">SearchService.ts</span> ← Create this file
-                </div>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">💾</span>
-                    Create SearchService.ts
-                </h3>
-                <p>This is the core logic that handles all SharePoint API interactions. Create <code>src/webparts/multiListSearch/services/SearchService.ts</code>:</p>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span class="code-label">SearchService.ts (Part 1 of 2)</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <pre><span class="keyword">import</span> { sp } <span class="keyword">from</span> <span class="string">"@pnp/sp/presets/all"</span>;
-<span class="keyword">import</span> { ISearchResult, IListInfo, ISearchResponse } <span class="keyword">from</span> <span class="string">"../models/ISearchResult"</span>;
-
-<span class="keyword">export class</span> SearchService {
-  
-  <span class="comment">// Initialize PnP JS with SharePoint context</span>
-  <span class="keyword">public async</span> <span class="function">initialize</span>(siteUrl: <span class="keyword">string</span>): <span class="keyword">Promise</span>&lt;<span class="keyword">void</span>&gt; {
-    sp.<span class="function">setup</span>({
-      sp: {
-        baseUrl: siteUrl
-      }
-    });
-  }
-
-  <span class="comment">// Get all non-hidden lists from the site</span>
-  <span class="keyword">public async</span> <span class="function">getAllLists</span>(): <span class="keyword">Promise</span>&lt;IListInfo[]&gt; {
-    <span class="keyword">try</span> {
-      <span class="keyword">const</span> lists = <span class="keyword">await</span> sp.web.lists
-        .<span class="function">filter</span>(<span class="string">"Hidden eq false and BaseTemplate eq 100"</span>)
-        .<span class="function">select</span>(<span class="string">"Id"</span>, <span class="string">"Title"</span>, <span class="string">"ItemCount"</span>)
-        .<span class="function">get</span>();
-
-      <span class="keyword">return</span> lists.<span class="function">map</span>(list => ({
-        id: list.Id,
-        title: list.Title,
-        itemCount: list.ItemCount
-      }));
-    } <span class="keyword">catch</span> (error) {
-      console.<span class="function">error</span>(<span class="string">"Error fetching lists:"</span>, error);
-      <span class="keyword">throw</span> error;
-    }
-  }</pre>
-                </div>
-
-                <div class="code-block">
-                    <div class="code-header">
-                        <span class="code-label">SearchService.ts (Part 2 of 2)</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <pre>  <span class="comment">// Main search function - searches all lists in parallel</span>
-  <span class="keyword">public async</span> <span class="function">searchAllLists</span>(
-    searchTerm: <span class="keyword">string</span>, 
-    targetLists?: <span class="keyword">string</span>[]
-  ): <span class="keyword">Promise</span>&lt;ISearchResponse&gt; {
-    <span class="keyword">const</span> startTime = performance.<span class="function">now</span>();
-    
-    <span class="keyword">try</span> {
-      <span class="comment">// Get all lists or filter by target lists</span>
-      <span class="keyword">let</span> lists = <span class="keyword">await</span> <span class="keyword">this</span>.<span class="function">getAllLists</span>();
-      
-      <span class="keyword">if</span> (targetLists && targetLists.length > 0) {
-        lists = lists.<span class="function">filter</span>(l => 
-          targetLists.<span class="function">some</span>(t => 
-            l.title.<span class="function">toLowerCase</span>() === t.<span class="function">toLowerCase</span>()
-          )
-        );
-      }
-
-      <span class="comment">// Search each list in parallel for maximum performance</span>
-      <span class="keyword">const</span> searchPromises = lists.<span class="function">map</span>(list => 
-        <span class="keyword">this</span>.<span class="function">searchList</span>(list.id, list.title, searchTerm)
-      );
-
-      <span class="keyword">const</span> resultsArrays = <span class="keyword">await</span> Promise.<span class="function">all</span>(searchPromises);
-      
-      <span class="comment">// Flatten and combine results from all lists</span>
-      <span class="keyword">const</span> allResults = resultsArrays.<span class="function">flat</span>();
-      
-      <span class="comment">// Sort by relevance</span>
-      <span class="keyword">const</span> sortedResults = <span class="keyword">this</span>.<span class="function">sortResults</span>(allResults, searchTerm);
-
-      <span class="keyword">const</span> executionTime = performance.<span class="function">now</span>() - startTime;
-
-      <span class="keyword">return</span> {
-        results: sortedResults,
-        totalCount: sortedResults.length,
-        searchTerm,
-        executionTime
-      };
-    } <span class="keyword">catch</span> (error) {
-      console.<span class="function">error</span>(<span class="string">"Error during search:"</span>, error);
-      <span class="keyword">throw</span> error;
-    }
-  }
-
-  <span class="comment">// Search a single list</span>
-  <span class="keyword">private async</span> <span class="function">searchList</span>(
-    listId: <span class="keyword">string</span>, 
-    listTitle: <span class="keyword">string</span>, 
-    searchTerm: <span class="keyword">string</span>
-  ): <span class="keyword">Promise</span>&lt;ISearchResult[]&gt; {
-    <span class="keyword">try</span> {
-      <span class="keyword">const</span> filter = <span class="keyword">this</span>.<span class="function">buildFilterQuery</span>(searchTerm);
-      
-      <span class="keyword">const</span> items = <span class="keyword">await</span> sp.web.lists.<span class="function">getById</span>(listId).items
-        .<span class="function">select</span>(<span class="string">"Id"</span>, <span class="string">"Title"</span>, <span class="string">"Modified"</span>, <span class="string">"Author/Title"</span>)
-        .<span class="function">expand</span>(<span class="string">"Author"</span>)
-        .<span class="function">filter</span>(filter)
-        .<span class="function">top</span>(100)
-        .<span class="function">get</span>();
-
-      <span class="keyword">return</span> items.<span class="function">map</span>(item => ({
-        id: item.Id,
-        title: item.Title,
-        listTitle: listTitle,
-        listId: listId,
-        modified: <span class="keyword">new</span> <span class="function">Date</span>(item.Modified),
-        author: item.Author?.Title || <span class="string">"Unknown"</span>,
-        url: <span class="string">`\${sp.web.url}/Lists/\${listTitle}/DispForm.aspx?ID=\${item.Id}`</span>
-      }));
-    } <span class="keyword">catch</span> (error) {
-      console.<span class="function">warn</span>(<span class="string">`Error searching list \${listTitle}:`</span>, error);
-      <span class="keyword">return</span> [];
-    }
-  }
-
-  <span class="comment">// Build OData filter query</span>
-  <span class="keyword">private</span> <span class="function">buildFilterQuery</span>(searchTerm: <span class="keyword">string</span>): <span class="keyword">string</span> {
-    <span class="keyword">const</span> term = searchTerm.<span class="function">toLowerCase</span>();
-    <span class="keyword">return</span> <span class="string">`(substringof('\${term}', tolower(Title)))`</span>;
-  }
-
-  <span class="comment">// Sort results by relevance</span>
-  <span class="keyword">private</span> <span class="function">sortResults</span>(
-    results: ISearchResult[], 
-    searchTerm: <span class="keyword">string</span>
-  ): ISearchResult[] {
-    <span class="keyword">return</span> results.<span class="function">sort</span>((a, b) => {
-      <span class="keyword">const</span> aTitleMatch = a.title.<span class="function">toLowerCase</span>()
-        .<span class="function">includes</span>(searchTerm.<span class="function">toLowerCase</span>());
-      <span class="keyword">const</span> bTitleMatch = b.title.<span class="function">toLowerCase</span>()
-        .<span class="function">includes</span>(searchTerm.<span class="function">toLowerCase</span>());
-
-      <span class="keyword">if</span> (aTitleMatch && !bTitleMatch) <span class="keyword">return</span> -1;
-      <span class="keyword">if</span> (!aTitleMatch && bTitleMatch) <span class="keyword">return</span> 1;
-
-      <span class="keyword">return</span> b.modified.<span class="function">getTime</span>() - a.modified.<span class="function">getTime</span>();
-    });
-  }
-}</pre>
-                </div>
-            </div>
-
-            <div class="info-box">
-                <div class="info-box-title">
-                    <span>🚀</span> Performance Optimization
-                </div>
-                <p>The service uses <code>Promise.all()</code> to query all lists in parallel, dramatically reducing total execution time compared to sequential queries.</p>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep()">← Previous</button>
-                <button class="btn btn-primary" onclick="nextStep()">Next Step →</button>
-            </div>
-        </section>
-
-        <!-- Step 5: Create React Component -->
-        <section class="section" id="step-5" style="display: none;">
-            <div class="section-header">
-                <div class="section-number">5</div>
-                <h2 class="section-title">Build the React UI Component</h2>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">📝</span>
-                    Update MultiListSearch.tsx
-                </h3>
-                <p>Replace the contents of <code>src/webparts/multiListSearch/components/MultiListSearch.tsx</code>:</p>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span class="code-label">MultiListSearch.tsx (Part 1 of 3)</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <pre><span class="keyword">import</span> * <span class="keyword">as</span> React <span class="keyword">from</span> <span class="string">'react'</span>;
-<span class="keyword">import</span> { ISearchResult } <span class="keyword">from</span> <span class="string">'../models/ISearchResult'</span>;
-<span class="keyword">import</span> { SearchService } <span class="keyword">from</span> <span class="string">'../services/SearchService'</span>;
-<span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">'./MultiListSearch.module.scss'</span>;
-
-<span class="keyword">export interface</span> IMultiListSearchProps {
-  siteUrl: <span class="keyword">string</span>;
-}
-
-<span class="keyword">export interface</span> IMultiListSearchState {
-  searchTerm: <span class="keyword">string</span>;
-  results: ISearchResult[];
-  isLoading: <span class="keyword">boolean</span>;
-  error?: <span class="keyword">string</span>;
-  totalCount: <span class="keyword">number</span>;
-}
-
-<span class="keyword">export default class</span> MultiListSearch <span class="keyword">extends</span> 
-  React.Component&lt;IMultiListSearchProps, IMultiListSearchState&gt; {
-  
-  <span class="keyword">private</span> searchService: SearchService;
-  <span class="keyword">private</span> searchTimeout: NodeJS.Timeout;
-
-  <span class="function">constructor</span>(props: IMultiListSearchProps) {
-    <span class="keyword">super</span>(props);
-    
-    <span class="keyword">this</span>.state = {
-      searchTerm: <span class="string">''</span>,
-      results: [],
-      isLoading: <span class="keyword">false</span>,
-      totalCount: 0
-    };
-
-    <span class="keyword">this</span>.searchService = <span class="keyword">new</span> <span class="function">SearchService</span>();
-  }
-
-  <span class="keyword">public async</span> <span class="function">componentDidMount</span>(): <span class="keyword">Promise</span>&lt;<span class="keyword">void</span>&gt; {
-    <span class="keyword">await</span> <span class="keyword">this</span>.searchService.<span class="function">initialize</span>(<span class="keyword">this</span>.props.siteUrl);
-  }</pre>
-                </div>
-
-                <div class="code-block">
-                    <div class="code-header">
-                        <span class="code-label">MultiListSearch.tsx (Part 2 of 3)</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <pre>  <span class="keyword">private</span> handleSearchChange = (
-    event: React.ChangeEvent&lt;HTMLInputElement&gt;
-  ): <span class="keyword">void</span> => {
-    <span class="keyword">const</span> searchTerm = event.target.value;
-    <span class="keyword">this</span>.<span class="function">setState</span>({ searchTerm });
-
-    <span class="comment">// Debounce search to avoid excessive API calls</span>
-    <span class="function">clearTimeout</span>(<span class="keyword">this</span>.searchTimeout);
-    
-    <span class="keyword">if</span> (searchTerm.length >= 3) {
-      <span class="keyword">this</span>.searchTimeout = <span class="function">setTimeout</span>(() => {
-        <span class="keyword">this</span>.<span class="function">executeSearch</span>(searchTerm);
-      }, 500);
-    } <span class="keyword">else</span> {
-      <span class="keyword">this</span>.<span class="function">setState</span>({ results: [], totalCount: 0 });
-    }
-  }
-
-  <span class="keyword">private async</span> <span class="function">executeSearch</span>(searchTerm: <span class="keyword">string</span>): <span class="keyword">Promise</span>&lt;<span class="keyword">void</span>&gt; {
-    <span class="keyword">this</span>.<span class="function">setState</span>({ isLoading: <span class="keyword">true</span>, error: <span class="keyword">undefined</span> });
-
-    <span class="keyword">try</span> {
-      <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="keyword">this</span>.searchService
-        .<span class="function">searchAllLists</span>(searchTerm);
-      
-      <span class="keyword">this</span>.<span class="function">setState</span>({
-        results: response.results,
-        totalCount: response.totalCount,
-        isLoading: <span class="keyword">false</span>
-      });
-    } <span class="keyword">catch</span> (error) {
-      <span class="keyword">this</span>.<span class="function">setState</span>({
-        error: <span class="string">'Failed to search lists. Please try again.'</span>,
-        isLoading: <span class="keyword">false</span>
-      });
-    }
-  }</pre>
-                </div>
-
-                <div class="code-block">
-                    <div class="code-header">
-                        <span class="code-label">MultiListSearch.tsx (Part 3 of 3)</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <pre>  <span class="keyword">public</span> <span class="function">render</span>(): React.ReactElement&lt;IMultiListSearchProps&gt; {
-    <span class="keyword">const</span> { searchTerm, results, isLoading, error, totalCount } = <span class="keyword">this</span>.state;
-
-    <span class="keyword">return</span> (
-      &lt;<span class="keyword">div</span> className={styles.multiListSearch}&gt;
-        &lt;<span class="keyword">div</span> className={styles.searchBox}&gt;
-          &lt;<span class="keyword">input</span>
-            type=<span class="string">"text"</span>
-            placeholder=<span class="string">"Search across all lists..."</span>
-            value={searchTerm}
-            onChange={<span class="keyword">this</span>.handleSearchChange}
-            className={styles.searchInput}
-          /&gt;
-        &lt;/<span class="keyword">div</span>&gt;
-
-        {isLoading && (
-          &lt;<span class="keyword">div</span> className={styles.loading}&gt;
-            Searching...
-          &lt;/<span class="keyword">div</span>&gt;
-        )}
-
-        {error && (
-          &lt;<span class="keyword">div</span> className={styles.error}&gt;{error}&lt;/<span class="keyword">div</span>&gt;
-        )}
-
-        {!isLoading && results.length > 0 && (
-          &lt;<span class="keyword">div</span> className={styles.results}&gt;
-            &lt;<span class="keyword">div</span> className={styles.resultCount}&gt;
-              Found {totalCount} results
-            &lt;/<span class="keyword">div</span>&gt;
-            {results.<span class="function">map</span>(result => (
-              &lt;<span class="keyword">div</span> key={<span class="string">`\${result.listId}-\${result.id}`</span>} 
-                   className={styles.resultItem}&gt;
-                &lt;<span class="keyword">a</span> href={result.url} className={styles.resultTitle}&gt;
-                  {result.title}
-                &lt;/<span class="keyword">a</span>&gt;
-                &lt;<span class="keyword">div</span> className={styles.resultMeta}&gt;
-                  &lt;<span class="keyword">span</span> className={styles.listName}&gt;
-                    {result.listTitle}
-                  &lt;/<span class="keyword">span</span>&gt;
-                  &lt;<span class="keyword">span</span> className={styles.modified}&gt;
-                    Modified: {result.modified.<span class="function">toLocaleDateString</span>()}
-                  &lt;/<span class="keyword">span</span>&gt;
-                  &lt;<span class="keyword">span</span> className={styles.author}&gt;
-                    By: {result.author}
-                  &lt;/<span class="keyword">span</span>&gt;
-                &lt;/<span class="keyword">div</span>&gt;
-              &lt;/<span class="keyword">div</span>&gt;
-            ))}
-          &lt;/<span class="keyword">div</span>&gt;
-        )}
-
-        {!isLoading && searchTerm.length >= 3 && results.length === 0 && (
-          &lt;<span class="keyword">div</span> className={styles.noResults}&gt;
-            No results found for <span class="string">"{searchTerm}"</span>
-          &lt;/<span class="keyword">div</span>&gt;
-        )}
-      &lt;/<span class="keyword">div</span>&gt;
-    );
-  }
-}</pre>
-                </div>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">🎨</span>
-                    Update Styles
-                </h3>
-                <p>Replace <code>src/webparts/multiListSearch/components/MultiListSearch.module.scss</code>:</p>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span class="code-label">MultiListSearch.module.scss</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <pre>.multiListSearch {
-  padding: 20px;
-  
-  .searchBox {
-    margin-bottom: 20px;
-    
-    .searchInput {
-      width: 100%;
-      padding: 12px 16px;
-      font-size: 16px;
-      border: 2px solid #ddd;
-      border-radius: 4px;
-      transition: border-color 0.3s;
-      
-      &:focus {
-        outline: none;
-        border-color: #0078d4;
-      }
-    }
-  }
-  
-  .loading {
-    text-align: center;
-    padding: 40px;
-    color: #666;
-    font-style: italic;
-  }
-  
-  .error {
-    background: #FFE6E6;
-    border-left: 4px solid #DC3545;
-    padding: 15px;
-    color: #DC3545;
-    margin-bottom: 20px;
-    border-radius: 4px;
-  }
-  
-  .results {
-    .resultCount {
-      padding: 10px 0;
-      color: #666;
-      font-weight: 600;
-      border-bottom: 2px solid #eee;
-      margin-bottom: 15px;
-    }
-    
-    .resultItem {
-      padding: 15px;
-      border-bottom: 1px solid #eee;
-      transition: background 0.2s;
-      
-      &:hover {
-        background: #f9f9f9;
-      }
-      
-      .resultTitle {
-        color: #0078d4;
-        font-size: 18px;
-        font-weight: 600;
-        text-decoration: none;
-        display: block;
-        margin-bottom: 8px;
-        
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-      
-      .resultMeta {
-        font-size: 14px;
-        color: #666;
-        
-        span {
-          margin-right: 15px;
-        }
-        
-        .listName {
-          background: #E3F2FD;
-          padding: 2px 8px;
-          border-radius: 3px;
-          font-weight: 500;
-        }
-      }
-    }
-  }
-  
-  .noResults {
-    text-align: center;
-    padding: 60px 20px;
-    color: #999;
-    font-size: 16px;
-  }
-}</pre>
-                </div>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep()">← Previous</button>
-                <button class="btn btn-primary" onclick="nextStep()">Next Step →</button>
-            </div>
-        </section>
-
-        <!-- Step 6: Test Locally -->
-        <section class="section" id="step-6" style="display: none;">
-            <div class="section-header">
-                <div class="section-number">6</div>
-                <h2 class="section-title">Test Your Solution</h2>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">🚀</span>
-                    Start Local Development Server
-                </h3>
-                <p>In your terminal, run:</p>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span class="code-label">Terminal Command</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <pre>gulp serve</pre>
-                </div>
-                <p>This will:</p>
+        <section id="experience">
+            <h2>Professional Experience</h2>
+            
+            <div class="experience-item">
+                <div class="job-title">Project Lead</div>
+                <div class="company">Muthal Software, Chennai, India (Remote)</div>
+                <div class="date">December 2025 – Present</div>
                 <ul>
-                    <li>Build your project</li>
-                    <li>Start a local development server</li>
-                    <li>Open the SharePoint Workbench in your browser</li>
+                    <li>Leading analytical initiatives for US-based clients, conducting requirements analysis to identify key business metrics and develop customized reporting solutions</li>
+                    <li>Architecting enterprise Power BI solutions with complex DAX calculations, data models, and interactive dashboards enabling real-time business intelligence</li>
+                    <li>Performing advanced data analysis on multi-million dollar portfolios, identifying trends, patterns, and anomalies that inform strategic business decisions</li>
+                    <li>Designing and implementing ETL processes to integrate data from multiple sources including SharePoint, SQL databases, and APIs</li>
+                    <li>Mentoring team members on analytics best practices including data modeling, DAX optimization, and effective visualization techniques</li>
                 </ul>
             </div>
 
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">🌐</span>
-                    Test in SharePoint Workbench
-                </h3>
-                <p>Navigate to your SharePoint site's workbench:</p>
-                <div class="info-box">
-                    <p><strong>URL Format:</strong></p>
-                    <code>https://yourtenant.sharepoint.com/sites/yoursite/_layouts/15/workbench.aspx</code>
-                </div>
-                <ol>
-                    <li>Click the "+" icon to add a web part</li>
-                    <li>Find "MultiListSearch" in the web part picker</li>
-                    <li>Add it to the page</li>
-                    <li>Try searching for items in your lists!</li>
-                </ol>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">✅</span>
-                    Validation Checklist
-                </h3>
-                <ul class="checklist">
-                    <li>Search input accepts text</li>
-                    <li>Debouncing works (wait 500ms after typing)</li>
-                    <li>Loading indicator appears during search</li>
-                    <li>Results appear from multiple lists</li>
-                    <li>Each result shows: title, list name, modified date, author</li>
-                    <li>Clicking a result navigates to the item</li>
-                    <li>No results message appears for non-matching searches</li>
-                    <li>Error handling works (try disconnecting internet)</li>
-                </ul>
-            </div>
-
-            <div class="success-box">
-                <div class="success-box-title">
-                    <span>🎊</span> Testing Complete!
-                </div>
-                <p>If all checks pass, your POC is working correctly! The search should return results in under 3 seconds for typical datasets.</p>
-            </div>
-
-            <div class="warning-box">
-                <div class="warning-box-title">
-                    <span>🔍</span> Troubleshooting
-                </div>
+            <div class="experience-item">
+                <div class="job-title">Software Engineer</div>
+                <div class="company">Muthal Software, Chennai, India (Remote)</div>
+                <div class="date">May 2025 – December 2025</div>
                 <ul>
-                    <li><strong>CORS Error:</strong> Make sure you're using the SharePoint hosted workbench, not localhost</li>
-                    <li><strong>No Results:</strong> Verify your site has lists with items containing matching text</li>
-                    <li><strong>Build Error:</strong> Run <code>npm install</code> again to ensure all packages are installed</li>
+                    <li>Developed 15+ interactive Power BI dashboards with drill-through capabilities, improving reporting efficiency by 35%</li>
+                    <li>Conducted data profiling and quality assessments during legacy system migrations, designing validation rules for 10,000+ records</li>
+                    <li>Created sophisticated DAX measures for time intelligence, year-over-year comparisons, and running totals</li>
+                    <li>Performed root cause analysis on operational inefficiencies using data mining techniques</li>
+                    <li>Designed automated reporting workflows reducing manual reporting time by 30%</li>
                 </ul>
             </div>
 
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep()">← Previous</button>
-                <button class="btn btn-primary" onclick="nextStep()">Next Step →</button>
+            <div class="experience-item">
+                <div class="job-title">Junior Engineer</div>
+                <div class="company">Mindsprint Inc. (Olam Information Services), Chennai, India</div>
+                <div class="date">August 2022 – July 2024</div>
+                <ul>
+                    <li>Built 5+ Power BI dashboards with row-level security and mobile optimization, improving user satisfaction scores by 10%</li>
+                    <li>Embedded interactive reports into Dynamics 365 enabling real-time KPI tracking for sales and operational metrics</li>
+                    <li>Conducted stakeholder interviews to translate business needs into analytical solutions</li>
+                    <li>Performed descriptive and diagnostic analytics, creating visualizations for non-technical audiences</li>
+                    <li>Developed SQL queries for data extraction and analysis from relational databases</li>
+                </ul>
             </div>
         </section>
 
-        <!-- Step 7: Deploy -->
-        <section class="section" id="step-7" style="display: none;">
-            <div class="section-header">
-                <div class="section-number">7</div>
-                <h2 class="section-title">Deploy to SharePoint</h2>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">📦</span>
-                    Build Production Package
-                </h3>
-                <p>Stop the local server (Ctrl+C) and run these commands:</p>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span class="code-label">Terminal Commands</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <pre><span class="comment"># Create production bundle</span>
-gulp bundle --ship
-
-<span class="comment"># Package the solution</span>
-gulp package-solution --ship</pre>
+        <section id="projects">
+            <h2>Key Analytical Projects</h2>
+            
+            <div class="project-item">
+                <h3>Data-Driven Employee Attrition Analysis</h3>
+                <div class="date">October 2024 – January 2025 | MSc Business Analytics Capstone Project</div>
+                <ul>
+                    <li>Developed predictive models using Logistic Regression, Random Forest, and XGBoost achieving 85% accuracy</li>
+                    <li>Performed comprehensive EDA on 1,500+ employee records, identifying key retention risk factors</li>
+                    <li>Engineered features and applied statistical techniques including correlation analysis and chi-square tests</li>
+                    <li>Created interactive Power BI dashboards with predictive analytics visualizations and what-if analysis</li>
+                    <li>Delivered actionable recommendations supporting 15% improvement in retention strategy planning</li>
+                </ul>
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">R</span>
+                    <span class="tag">Machine Learning</span>
+                    <span class="tag">Power BI</span>
+                    <span class="tag">Predictive Analytics</span>
                 </div>
-                <p>This creates a <code>.sppkg</code> file in <code>sharepoint/solution/</code></p>
             </div>
 
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">☁️</span>
-                    Upload to App Catalog
-                </h3>
-                <ol>
-                    <li>Open SharePoint Admin Center</li>
-                    <li>Navigate to: <strong>More features → Apps → App Catalog</strong></li>
-                    <li>Click <strong>Apps for SharePoint</strong></li>
-                    <li>Click <strong>Upload</strong> and select your <code>.sppkg</code> file</li>
-                    <li>Check <strong>"Make this solution available to all sites"</strong></li>
-                    <li>Click <strong>Deploy</strong></li>
-                </ol>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">➕</span>
-                    Add to Your Site
-                </h3>
-                <ol>
-                    <li>Navigate to your target SharePoint site</li>
-                    <li>Go to <strong>Site Contents</strong></li>
-                    <li>Click <strong>New → App</strong></li>
-                    <li>Find <strong>"multi-list-search-client-side-solution"</strong></li>
-                    <li>Click <strong>Add</strong></li>
-                    <li>Wait for installation to complete (~30 seconds)</li>
-                </ol>
-            </div>
-
-            <div class="step-card">
-                <h3 class="step-title">
-                    <span class="step-icon">🎯</span>
-                    Add Web Part to Page
-                </h3>
-                <ol>
-                    <li>Edit any SharePoint page</li>
-                    <li>Click <strong>+</strong> to add a section</li>
-                    <li>Search for <strong>"MultiListSearch"</strong></li>
-                    <li>Click to add it to the page</li>
-                    <li>Click <strong>Publish</strong></li>
-                </ol>
-            </div>
-
-            <div class="success-box">
-                <div class="success-box-title">
-                    <span>🎉</span> Deployment Complete!
+            <div class="project-item">
+                <h3>Feasibility Study of Sensory Room</h3>
+                <div class="date">May 2025 – October 2025 | The Meadows Community Centre</div>
+                <ul>
+                    <li>Led comprehensive feasibility analysis combining quantitative surveys (n=60) and qualitative interviews (n=6)</li>
+                    <li>Performed financial modeling including cost-revenue forecasting, break-even analysis, and NPV calculations</li>
+                    <li>Conducted statistical analysis identifying 90% positive community response indicating strong demand</li>
+                    <li>Developed strategic recommendations with hybrid funding model and phased rollout plan</li>
+                    <li>Presented findings through compelling data visualizations achieving stakeholder buy-in</li>
+                </ul>
+                <div class="project-tags">
+                    <span class="tag">Financial Modeling</span>
+                    <span class="tag">Statistical Analysis</span>
+                    <span class="tag">Stakeholder Management</span>
                 </div>
-                <p>Your SharePoint Multi-List Search is now live and available to all users! The solution is production-ready and can search across all lists in the site.</p>
             </div>
 
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep()">← Previous</button>
-                <button class="btn btn-primary" disabled>Completed! 🎊</button>
+            <div class="project-item">
+                <h3>Systematic Investment Portfolio Analytics</h3>
+                <div class="date">January 2023 – December 2023 | Olam Agri Group</div>
+                <ul>
+                    <li>Applied advanced analytics to analyze $2M+ investment portfolio providing spending insights</li>
+                    <li>Designed complex Power BI dashboards with custom DAX measures for ROI analysis and budget variance tracking</li>
+                    <li>Developed relational database schema with normalized tables and optimized indexing</li>
+                    <li>Improved financial transparency by 25% through automated reporting</li>
+                    <li>Created drill-through reports enabling analysis by category, time period, and performance indicators</li>
+                </ul>
+                <div class="project-tags">
+                    <span class="tag">Power BI</span>
+                    <span class="tag">DAX</span>
+                    <span class="tag">Financial Analysis</span>
+                    <span class="tag">Database Design</span>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <h3>Cost Optimization Analysis – Web Page Replication</h3>
+                <div class="date">January 2024 – July 2024 | Arise Net</div>
+                <ul>
+                    <li>Conducted comprehensive cost-benefit analysis comparing in-house vs. third-party maintenance</li>
+                    <li>Performed financial analysis demonstrating $65K annual cost savings (65% reduction)</li>
+                    <li>Analyzed system performance metrics documenting 40% improvement in page load times</li>
+                    <li>Created business case presentation with ROI calculations and risk assessment</li>
+                </ul>
+                <div class="project-tags">
+                    <span class="tag">Cost-Benefit Analysis</span>
+                    <span class="tag">ROI Calculation</span>
+                    <span class="tag">Performance Analytics</span>
+                </div>
             </div>
         </section>
 
-        <!-- Additional Resources -->
-        <section class="section">
-            <div class="section-header">
-                <div class="section-number">📚</div>
-                <h2 class="section-title">Additional Resources</h2>
-            </div>
-
-            <div class="resources-grid">
-                <div class="resource-card">
-                    <div class="resource-title">SPFx Documentation</div>
-                    <p>Official Microsoft documentation for SharePoint Framework</p>
-                    <a href="https://aka.ms/spfx" target="_blank" class="resource-link">Visit Documentation →</a>
+        <section id="education">
+            <h2>Education & Certifications</h2>
+            <div class="education-grid">
+                <div class="education-card">
+                    <h3>MSc Business Analytics</h3>
+                    <div class="company">Northumbria University, Newcastle Upon Tyne, UK</div>
+                    <div class="date">September 2024 – December 2025</div>
+                    <p style="margin-top: 15px; color: #555;">Relevant Coursework: Data Mining, Machine Learning, Business Intelligence, Statistical Analysis, Predictive Modeling, Data Visualization</p>
                 </div>
-
-                <div class="resource-card">
-                    <div class="resource-title">PnP JS Library</div>
-                    <p>Comprehensive guide to PnPjs patterns and practices</p>
-                    <a href="https://pnp.github.io/pnpjs/" target="_blank" class="resource-link">View Library Docs →</a>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-title">SharePoint REST API</div>
-                    <p>Complete reference for SharePoint REST endpoints</p>
-                    <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/get-to-know-the-sharepoint-rest-service" target="_blank" class="resource-link">API Reference →</a>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-title">React Documentation</div>
-                    <p>Learn more about React patterns and best practices</p>
-                    <a href="https://react.dev" target="_blank" class="resource-link">React Docs →</a>
+                <div class="education-card">
+                    <h3>BTech Computer Science Engineering</h3>
+                    <div class="company">Hindustan Institute of Technology and Science, Chennai, India</div>
+                    <div class="date">July 2018 – April 2022</div>
+                    <p style="margin-top: 15px; color: #555;">Relevant Coursework: Database Management Systems, Data Structures & Algorithms, Statistics for Engineers</p>
                 </div>
             </div>
 
-            <div style="margin-top: 40px;">
-                <h3 style="color: var(--primary); margin-bottom: 20px;">Next Steps for Production</h3>
-                <ul>
-                    <li>Add filtering by date range, list, or content type</li>
-                    <li>Implement pagination for large result sets</li>
-                    <li>Add export functionality (Excel/CSV)</li>
-                    <li>Create saved search feature</li>
-                    <li>Add search analytics and tracking</li>
-                    <li>Implement advanced query operators</li>
-                    <li>Add multi-language support</li>
-                    <li>Ensure WCAG 2.1 AA accessibility compliance</li>
-                </ul>
+            <h3 style="margin-top: 40px;">Professional Certifications</h3>
+            <div class="skills-grid" style="margin-top: 20px;">
+                <div class="skill-card">
+                    <h4>Google Data Analytics Professional Certificate</h4>
+                    <p style="color: #888; margin-top: 5px;">June 2025</p>
+                </div>
+                <div class="skill-card">
+                    <h4>Microsoft Azure Fundamentals AZ-900</h4>
+                    <p style="color: #888; margin-top: 5px;">December 2023</p>
+                </div>
+                <div class="skill-card">
+                    <h4>Python for Data Science and AI</h4>
+                    <p style="color: #888; margin-top: 5px;">Certified</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Let's Connect</h2>
+            <p style="font-size: 1.1em; color: #555; margin-bottom: 30px;">I'm always interested in discussing new opportunities, collaborations, or data analytics challenges. Feel free to reach out!</p>
+            <div style="text-align: center;">
+                <a href="mailto:krishnasoumen2@gmail.com" class="cta-button">Get In Touch</a>
+                <a href="#" class="cta-button" onclick="downloadResume(event)" style="margin-left: 20px;">Download Resume</a>
+            </div>
+            <div style="margin-top: 40px; text-align: center;">
+                <p style="color: #888;">📍 Newcastle, UK</p>
+                <p style="color: #888; margin-top: 10px;">📧 krishnasoumen2@gmail.com | 📱 +44 7823615433</p>
             </div>
         </section>
     </div>
 
     <footer>
-        <h3>Congratulations! 🎉</h3>
-        <p>You've successfully built a SharePoint Multi-List Search POC</p>
-        <p style="margin-top: 15px; opacity: 0.9;">This solution demonstrates real-time search across multiple lists with professional UI and optimal performance.</p>
+        <div class="container">
+            <p>&copy; 2025 Soumen Pramanick. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Business Analytics Specialist | Newcastle, UK</p>
+        </div>
     </footer>
 
     <script>
-        let currentStep = 0;
-        const totalSteps = 8;
-
-        function updateProgress() {
-            const progress = ((currentStep) / (totalSteps - 1)) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-
-            // Update step indicators
-            const steps = document.querySelectorAll('.progress-step');
-            steps.forEach((step, index) => {
-                step.classList.remove('active', 'completed');
-                if (index === currentStep) {
-                    step.classList.add('active');
-                } else if (index < currentStep) {
-                    step.classList.add('completed');
-                }
-            });
-
-            // Show current section
-            const sections = document.querySelectorAll('.section');
-            sections.forEach((section, index) => {
-                if (section.id === `step-${currentStep}`) {
-                    section.style.display = 'block';
-                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                } else if (section.id && section.id.startsWith('step-')) {
-                    section.style.display = 'none';
-                }
-            });
-        }
-
-        function nextStep() {
-            if (currentStep < totalSteps - 1) {
-                currentStep++;
-                updateProgress();
-            }
-        }
-
-        function prevStep() {
-            if (currentStep > 0) {
-                currentStep--;
-                updateProgress();
-            }
-        }
-
-        function copyCode(button) {
-            const codeBlock = button.closest('.code-block');
-            const code = codeBlock.querySelector('pre').textContent;
+        // Download Resume Function
+        function downloadResume(e) {
+            e.preventDefault();
             
-            navigator.clipboard.writeText(code).then(() => {
-                button.textContent = 'Copied!';
-                button.classList.add('copied');
-                setTimeout(() => {
-                    button.textContent = 'Copy';
-                    button.classList.remove('copied');
-                }, 2000);
-            });
+            // Create a simple text-based resume
+            const resumeContent = `SOUMEN PRAMANICK
+Business Analytics Specialist
+Newcastle, UK | +44 7823615433 | krishnasoumen2@gmail.com
+
+PROFESSIONAL SUMMARY
+Data-driven Business Analytics Specialist with MSc in Business Analytics and 2.5+ years of experience transforming data into actionable business insights. Expertise in advanced analytics, predictive modeling, and data visualization using Power BI, Python, R, and SQL.
+
+TECHNICAL SKILLS
+• Analytics & BI: Power BI, Tableau, Excel
+• Programming: Python, R, SQL
+• Machine Learning: Regression, Classification, Random Forest, XGBoost
+• Data Management: ETL/ELT, Data Warehousing, Database Design
+• Business Tools: Microsoft Power Platform, Azure, SharePoint
+
+PROFESSIONAL EXPERIENCE
+
+Project Lead | Muthal Software (December 2025 – Present)
+• Leading analytical initiatives for US-based clients
+• Architecting enterprise Power BI solutions with complex DAX calculations
+• Performing advanced data analysis on multi-million dollar portfolios
+• Designing and implementing ETL processes
+
+Software Engineer | Muthal Software (May 2025 – December 2025)
+• Developed 15+ interactive Power BI dashboards (35% efficiency improvement)
+• Conducted data profiling for 10,000+ records during migrations
+• Created sophisticated DAX measures for time intelligence analysis
+• Designed automated workflows (30% time reduction)
+
+Junior Engineer | Mindsprint Inc. (August 2022 – July 2024)
+• Built 5+ Power BI dashboards with row-level security
+• Embedded reports into Dynamics 365 for real-time KPI tracking
+• Conducted stakeholder interviews and requirements gathering
+
+KEY PROJECTS
+• Employee Attrition Analysis: Predictive models with 85% accuracy
+• Sensory Room Feasibility Study: Financial modeling and strategic recommendations
+• Investment Portfolio Analytics: $2M+ portfolio analysis (25% transparency improvement)
+• Cost Optimization Analysis: $65K annual savings identified
+
+EDUCATION
+MSc Business Analytics | Northumbria University (2024-2025)
+BTech Computer Science | Hindustan Institute (2018-2022)
+
+CERTIFICATIONS
+• Google Data Analytics Professional Certificate
+• Microsoft Azure Fundamentals AZ-900
+• Python for Data Science and AI
+`;
+
+            // Create blob and download
+            const blob = new Blob([resumeContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Soumen_Pramanick_Resume.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            
+            // Show download notification
+            const notification = document.createElement('div');
+            notification.textContent = '✓ Resume downloaded successfully!';
+            notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #4CAF50; color: white; padding: 15px 25px; border-radius: 5px; z-index: 1000; animation: slideIn 0.3s ease;';
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
         }
 
-        // Allow clicking on progress steps to navigate
-        document.querySelectorAll('.progress-step').forEach(step => {
-            step.addEventListener('click', function() {
-                currentStep = parseInt(this.dataset.step);
-                updateProgress();
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             });
         });
 
-        // Initialize
-        updateProgress();
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
     </script>
 </body>
 </html>
